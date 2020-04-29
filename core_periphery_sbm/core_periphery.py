@@ -8,9 +8,6 @@ from collections import Counter
 import inference as infh
 import network_helper as nh
 
-# TODO:
-# - Implement function to return the inferred partition
-
 # ------------------------------------------------------------------------------
 # ------------------------ General core-periphery model ------------------------
 # ------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "A
 
 ## Running Core-Periphery Models
 
-The models can be run in Python with any NetworkX graph. To infer a hub-and-spoke structure, we write:
+The models can be run in Python with any NetworkX graph. To infer a hub-and-spoke structure:
 
 ```python
 import sys
@@ -29,7 +29,7 @@ hubspoke.infer(G)
 Similarly, we can infer a layered structure with `n_layers`:
 
 ```python
-layered = cp.LayeredCorePeriphery(n_layers=3, n_gibbs=100, n_mcmc=10*len(G), mcmc_init='previous')
+layered = cp.LayeredCorePeriphery(n_layers=3, n_gibbs=100, n_mcmc=10*len(G))
 layered.infer(G)
 ```
 
@@ -40,13 +40,13 @@ From the Gibbs samples, we can infer the core-periphery assignment of each node.
 
 ```python
 # Get core and periphery assignments from hub-and-spoke model
-node2label_hs = hubspoke.get_labels(last_n_samples=50, prob=False)
+node2label_hs = hubspoke.get_labels(last_n_samples=50)
 
 # Get layer assignments from the layered model
-node2label_l = layered.get_labels(last_n_samples=50, prob=True)
+node2label_l = layered.get_labels(last_n_samples=50)
 ```
 
-You can also retrieve the probability a node belongs to the core or periphery (hub-and-spoke model) or each layer (layered model). You can also retrieve just an array of labels or probabilities, where nodes are indexed according to their alphabetic order in the network.
+You can also retrieve the probability a node belongs to the core or periphery (hub-and-spoke model) or each layer (layered model). You can also retrieve just an array of labels or probabilities, where nodes are indexed according to their labels' alphabetic order in the network.
 
 ```python
 #  Dictionary of node -> ordered array of probabilities
