@@ -1,8 +1,9 @@
 import numpy as np
 import networkx as nx
-import inference as infh
-import network_helper as nh
 from scipy.stats import dirichlet
+
+from . import inference as infh
+from . import network_helper as nh
 
 # ------------------------------------------------------------------------------
 # ----------------------------- Sampling functions -----------------------------

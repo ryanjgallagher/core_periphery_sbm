@@ -5,8 +5,8 @@ import numpy as np
 import networkx as nx
 from collections import Counter
 
-import inference as infh
-import network_helper as nh
+from . import inference as infh
+from . import network_helper as nh
 
 # ------------------------------------------------------------------------------
 # ------------------------ General core-periphery model ------------------------

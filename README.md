@@ -14,9 +14,8 @@ The models can be run in Python with any NetworkX graph. To infer a hub-and-spok
 
 ```python
 import sys
-sys.path.append('core_periphery_sbm')
 import networkx as nx
-import core_periphery as cp
+from core_periphery_sbm import core_periphery as cp
 
 # Load Les Mis graph from NetworkX
 G = nx.les_miserables_graph()
@@ -61,7 +60,7 @@ inf_probs_l = layered.get_labels(last_n_samples=50, prob=True, return_dict=False
 Given core-periphery labels inferred from the hub-and-spoke and layered models, we want to determine which partition best describes the core-periphery structure of a network. We can do this by comparing the description length of the models. The *smaller* the description length, the *better* the model fit. We can approximate the description length for each core-periphery model using `n_samples`:
 
 ```python
-import model_fit as mf
+from core_periphery_sbm import model_fit as mf
 
 # Get description length of hub-and-spoke model
 inf_labels_hs = hubspoke.get_labels(last_n_samples=50, prob=False, return_dict=False)
