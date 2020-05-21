@@ -4,16 +4,13 @@ Core-periphery structure is one of the most ubiquitous mesoscale patterns in net
 
 If you use this code, please cite the following:
 
-```
-Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "A Clarified Typology of Core-Periphery Structure in Networks." arXiv preprint.
-```
+> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "[A Clarified Typology of Core-Periphery Structure in Networks](https://arxiv.org/abs/2005.10191)." arXiv preprint.
 
 ## Running Core-Periphery Models
 
 The models can be run in Python with any NetworkX graph. To infer a hub-and-spoke structure:
 
 ```python
-import sys
 import networkx as nx
 from core_periphery_sbm import core_periphery as cp
 
@@ -45,7 +42,7 @@ node2label_hs = hubspoke.get_labels(last_n_samples=50)
 node2label_l = layered.get_labels(last_n_samples=50)
 ```
 
-You can also retrieve the probability a node belongs to the core or periphery (hub-and-spoke model) or each layer (layered model). You can also retrieve just an array of labels or probabilities, where nodes are indexed according to their labels' alphabetic order in the network.
+You can estimate the probability a node belongs to the core or periphery (hub-and-spoke model) or each layer (layered model). You can also retrieve just an array of labels or probabilities, where nodes are indexed according to their labels' alphabetic order in the network.
 
 ```python
 #  Dictionary of node -> ordered array of probabilities
@@ -68,13 +65,11 @@ mdl_hubspoke = mf.mdl_hubspoke(G, inf_labels_hs, n_samples=100000)
 
 # Get the description length of layered model
 inf_labels_l = layered.get_labels(last_n_samples=50, prob=False, return_dict=False)
-mdl_layered = mf.mdl_layered(G, inf_labels_l, n_layers=3, n_samples=1000000)
+mdl_layered = mf.mdl_layered(G, inf_labels_l, n_layers=3, n_samples=100000)
 ```
 
 ## Further Reading
 
 For more details about the hub-and-spoke and layered core-periphery block models and how they are inferred, please see:
 
-```
-Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "A Clarified Typology of Core-Periphery Structure in Networks." arXiv preprint.
-```
+> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "[A Clarified Typology of Core-Periphery Structure in Networks](https://arxiv.org/abs/2005.10191)." arXiv preprint.
