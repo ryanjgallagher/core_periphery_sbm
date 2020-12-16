@@ -133,16 +133,15 @@ class CorePeriphery(object):
         """
         if last_n_samples is None:
             n_samples = self.n_gibbs
-            last_n_samples = self.n_gibbs
         else:
             n_samples = last_n_samples
 
         if prob:
-            inf_labels = [np.bincount(self.node_labels[-last_n_samples:,i],
+            inf_labels = [np.bincount(self.node_labels[-n_samples:,i],
                                       minlength=self.n_blocks) / n_samples
                           for i in self.nodes]
         else:
-            inf_labels = [np.argmax(np.bincount(self.node_labels[-last_n_samples:,i]))
+            inf_labels = [np.argmax(np.bincount(self.node_labels[-n_samples:,i]))
                           for i in self.nodes]
 
         if return_dict:
@@ -150,6 +149,45 @@ class CorePeriphery(object):
             return node2label
         else:
             return np.array(inf_labels)
+
+    def get_coreness(self, last_n_samples=None, return_dict=True):
+        """
+        Get the coreness of each node, a continuous measure of a node's position
+        in the core-periphery structure. The score varies between 0 and 1, where
+        0 indicates nodes that are least core (i.e. positioned in the periphery)
+        and 1 indicates nodes that are most core (i.e. positioned in the
+        innermost layer). Note this is opposite of how the labels are
+        interpretted: a core node will have a label of 0 and coreness of 1
+
+        Parameters
+        ----------
+        last_n_samples: int
+            Infer coreness over the last_n_samples in the Gibbs sample chain.
+            Defaults to inferring over the entire chain
+        return_dict: bool
+            If True, return dictionary mapping of node to coreness. If False,
+            return list of corenesses
+
+        Returns
+        -------
+        If return_dict is True, returns a dictionary where node labels are keys
+        and corenesses are values. Else returns an array the length of the
+        number of nodes where entries are corenesses
+        """
+        if last_n_samples is None:
+            n_samples = self.n_gibbs
+        else:
+            n_samples = last_n_samples
+
+        avg_blocks = np.mean(self.node_labels[-n_samples:], axis=0)
+        max_block = self.n_blocks - 1
+        normed_cs = 1 - (avg_blocks / max_block)
+
+        if return_dict:
+            node2coreness = {self.index2node[node_i]:c for node_i,c in enumerate(normed_cs)}
+            return node2coreness
+        else:
+            return normed_cs
 
     def clean_network(self, G):
         """
