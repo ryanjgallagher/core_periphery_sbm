@@ -52,6 +52,16 @@ node2probs_hs = hubspoke.get_labels(last_n_samples=50, prob=True, return_dict=Tr
 inf_probs_l = layered.get_labels(last_n_samples=50, prob=True, return_dict=False)
 ```
 
+You can also estimate a continuous coreness score for each node using either model. The coreness varies between 0 and 1, where peripheral nodes have a coreness of 0 and core nodes have a coreness of 1. Note, this is opposite of how the labels are interpreted: a node in the core will have a label of 0 but coreness of 1. The coreness is calculated using the normalized average layer of a node across the Gibbs samples.
+
+```python
+# Dictionary of node -> coreness
+node2coreness_hs = hubspoke.get_coreness(last_n_samples=50, return_dict=True)
+
+# Array of length n_nodes where entries are corenesses
+node2coreness_hs = hubspoke.get_coreness(last_n_samples=50, return_dict=False)
+```
+
 ## Core-Periphery Model Selection
 
 Given core-periphery labels inferred from the hub-and-spoke and layered models, we want to determine which partition best describes the core-periphery structure of a network. We can do this by comparing the description length of the models. The *smaller* the description length, the *better* the model fit. We can approximate the description length for each core-periphery model using `n_samples`:
