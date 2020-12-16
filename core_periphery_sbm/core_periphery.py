@@ -37,7 +37,9 @@ class CorePeriphery(object):
         moves: str
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
-            the neighbor labels. See [] for details
+            the neighbor labels. For details: Peixoto, T. P. (2014). Efficient
+            Monte Carlo and greedy heuristic for the inference of stochastic
+            block models. *Physical Review E*.
         seed: int
             Seed passed to np.random.seed()
         """
@@ -474,7 +476,9 @@ class LayeredCorePeriphery(CorePeriphery):
         moves: str
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
-            the neighbor labels. See [] for details
+            the neighbor labels. For details: Peixoto, T. P. (2014). Efficient
+            Monte Carlo and greedy heuristic for the inference of stochastic
+            block models. *Physical Review E*.
         seed: int
             Seed passed to np.random.seed()
         """
@@ -668,7 +672,9 @@ class HubSpokeCorePeriphery(CorePeriphery):
         moves: str
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
-            the neighbor labels. See [] for details
+            the neighbor labels. For details: Peixoto, T. P. (2014). Efficient
+            Monte Carlo and greedy heuristic for the inference of stochastic
+            block models. *Physical Review E*.
         seed: int
             Seed passed to np.random.seed()
         """
