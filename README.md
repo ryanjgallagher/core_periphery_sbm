@@ -31,6 +31,7 @@ layered.infer(G)
 
 The models are inferred through an MCMC-within-Gibbs sampling procedure. There are `n_gibbs` samples that are taken, and during each Gibbs sample, an MCMC chain of `n_mcmc` steps is run on the labels of the network.
 
+## Core-Periphery Model Output
 
 From the Gibbs samples, we can infer the core-periphery assignment of each node. Lower indices indicate *more* core positions. For example, in the hub-and-spoke model, 0 indicates the core and 1 indicates the periphery. In the layered model, 0 is the innermost layer.
 
