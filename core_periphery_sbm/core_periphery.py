@@ -13,7 +13,7 @@ from . import network_helper as nh
 # ------------------------------------------------------------------------------
 class CorePeriphery(object):
     def __init__(self, n_blocks=2, n_gibbs=200, n_mcmc=None, eps=1,
-                 mcmc_init="random", moves="random"):
+                 mcmc_init="random", moves="random", seed=None):
         """
         Parameters
         ----------
@@ -38,6 +38,8 @@ class CorePeriphery(object):
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
             the neighbor labels. See [] for details
+        seed: int
+            Seed passed to np.random.seed()
         """
         # Initialize inference parameters
         self.n_blocks = n_blocks
@@ -70,6 +72,9 @@ class CorePeriphery(object):
         self.log_posteriors = np.zeros(self.n_gibbs)
         self.log_labels_given_ps = np.zeros(self.n_gibbs)
         self.accepts = np.zeros(self.n_gibbs-1)
+
+        if seed is not None:
+            np.random.seed(seed)
 
     def infer(self, G):
         """
@@ -445,7 +450,7 @@ class CorePeriphery(object):
 # ------------------------------------------------------------------------------
 class LayeredCorePeriphery(CorePeriphery):
     def __init__(self, n_layers, n_gibbs=200, n_mcmc=None, eps=1,
-                 mcmc_init="random", moves="random"):
+                 mcmc_init="random", moves="random", seed=None):
         """
         Parameters
         ----------
@@ -470,9 +475,11 @@ class LayeredCorePeriphery(CorePeriphery):
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
             the neighbor labels. See [] for details
+        seed: int
+            Seed passed to np.random.seed()
         """
         # Initialize inference parameters and data structures
-        super().__init__(n_layers, n_gibbs, n_mcmc, eps, mcmc_init, moves)
+        super().__init__(n_layers, n_gibbs, n_mcmc, eps, mcmc_init, moves, seed)
         self.n_layers = n_layers
         # Initialize data structures specific for layered inference
         self.layer_ms = np.zeros((self.n_gibbs, self.n_layers), dtype=np.int64)
@@ -639,7 +646,7 @@ class LayeredCorePeriphery(CorePeriphery):
 # ------------------------------------------------------------------------------
 class HubSpokeCorePeriphery(CorePeriphery):
     def __init__(self, n_gibbs=200, n_mcmc=None, eps=1, mcmc_init="random",
-                 moves="random"):
+                 moves="random", seed=None):
         """
         Parameters
         ----------
@@ -662,9 +669,11 @@ class HubSpokeCorePeriphery(CorePeriphery):
             If "random", label proposals are drawn uniformly at random among all
             blocks during MCMC. If "neighbor", labels are proposed according to
             the neighbor labels. See [] for details
+        seed: int
+            Seed passed to np.random.seed()
         """
         # Initialize inference parameters and data structures
-        super().__init__(2, n_gibbs, n_mcmc, eps, mcmc_init, moves)
+        super().__init__(2, n_gibbs, n_mcmc, eps, mcmc_init, moves, seed)
         # Initialize data structures specific for hub+spoke inference
         self.block_ps = np.zeros((self.n_gibbs, self.n_blocks, self.n_blocks))
 
