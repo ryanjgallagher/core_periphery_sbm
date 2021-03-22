@@ -4,7 +4,7 @@ Core-periphery structure is one of the most ubiquitous mesoscale patterns in net
 
 If you use this code, please cite the following:
 
-> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "[A Clarified Typology of Core-Periphery Structure in Networks](https://arxiv.org/abs/2005.10191)." arXiv preprint.
+> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2021). "[A Clarified Typology of Core-Periphery Structure in Networks](https://advances.sciencemag.org/content/7/12/eabc9800)." *Science Advances*.
 
 ## Running Core-Periphery Models
 
@@ -83,4 +83,4 @@ mdl_layered = mf.mdl_layered(G, inf_labels_l, n_layers=3, n_samples=100000)
 
 For more details about the hub-and-spoke and layered core-periphery block models and how they are inferred, please see:
 
-> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2020). "[A Clarified Typology of Core-Periphery Structure in Networks](https://arxiv.org/abs/2005.10191)." arXiv preprint.
+> Gallagher, Ryan J., Young, Jean-Gabriel, and Foucault Welles, Brooke. (2021). "[A Clarified Typology of Core-Periphery Structure in Networks](https://advances.sciencemag.org/content/7/12/eabc9800)." *Science Advances*.
