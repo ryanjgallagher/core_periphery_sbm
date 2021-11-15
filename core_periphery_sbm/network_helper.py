@@ -1,5 +1,4 @@
 import numpy as np
-import networkx as nx
 
 def get_max_edges(block_r, block_s, block_ns):
     """

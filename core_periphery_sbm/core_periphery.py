@@ -1,5 +1,3 @@
-import os
-import sys
 import warnings
 import numpy as np
 import networkx as nx
@@ -246,7 +244,7 @@ class CorePeriphery(object):
         self.log_posteriors[0] = self.get_log_posterior()
         # Set number of MCMC steps if not set by user
         if self.n_mcmc is None:
-            self.n_mcmc = N * len(self.n_blocks)
+            self.n_mcmc = self.N_nodes * len(self.n_blocks)
 
     def update_block_stats(self, G):
         """
